@@ -11,6 +11,7 @@ document.getElementById('depositBtn').addEventListener('click', function(){
     const currentBalanceInt = balance.innerText;
     const totalCurrent = parseFloat(currentBalanceInt) + depositNew;
     balance.innerText = totalCurrent;
+    depositAmount.value = '';
 });
 
 document.getElementById('withdrawBtn').addEventListener('click', function(){
@@ -23,11 +24,18 @@ document.getElementById('withdrawBtn').addEventListener('click', function(){
     if(withdrawAmountValueInt >= 0){
         const withdrawDolarInner = withdrawDolar.innerText;
         const newWithDrawAmount = parseFloat(withdrawDolarInner) + withdrawAmountValueInt;
-        withdrawDolar.innerText = newWithDrawAmount;
         const newWithDraw = currentBalanceInt - withdrawAmountValueInt;
-        balance.innerText = newWithDraw;
+        // balance.innerText = newWithDraw;
+        if (newWithDraw >= withdrawAmountValueInt){
+            withdrawDolar.innerText = newWithDrawAmount;
+            balance.innerText = newWithDraw;
+        }
+        else {
+            alert("You can't withdraw more money from your main Balance!!")
+        }
     }
     else{
         alert('Hey Mad! Withdraw Amount cant be Negative Value');
     }
+    withdrawAmount.value = '';
 });
